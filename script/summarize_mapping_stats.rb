@@ -7,6 +7,7 @@ puts "# " + %w{sample_name  F5orF3  mapping_rate  mapped_tags  /  total_tags}.jo
 
 Dir["#{target_dir_pattern}/output/F[35]/s_mapping/mapping-stats.txt"].sort.each do |file|
 
+
   txt = File.open(file).read
   total_tags = /(^\d[\d,]+) total tags found/.match(txt)[1].gsub(/,/, '').to_i
 
@@ -14,7 +15,7 @@ Dir["#{target_dir_pattern}/output/F[35]/s_mapping/mapping-stats.txt"].sort.each 
 
   map_ratio = mapped_tags.to_f / total_tags
 
-  sample_name = %r{/([^/]+?)/+output}.match(file)[1]
+  sample_name = %r{([^/]+?)/output}.match(file)[1]
   sample_name.sub!(/ngs_cai_analysis_\d+_/, '')
 
   f5_or_f3 = %r{/(F[35])/s_mapping}.match(file)[1]
